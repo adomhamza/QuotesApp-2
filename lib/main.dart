@@ -11,7 +11,7 @@ class QuotesCard extends StatefulWidget {
 }
 
 class _QuotesCardState extends State<QuotesCard> {
-  List<Quote> quote = [
+  List<Quote> quotes = [
     Quote(
         text: "If you tell the truth, you don't have to remember anything.",
         author: 'Mark Twain'),
@@ -21,10 +21,41 @@ class _QuotesCardState extends State<QuotesCard> {
             "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.",
         author: 'Albert Einstein'),
   ];
+
+  Widget quoteTemplate(quote) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              quote.text,
+              style: TextStyle(
+                fontSize: 18.0,
+                letterSpacing: 2.0,
+                height: 2.0,
+              ),
+            ),
+            Text(
+              quote.author,
+              style: TextStyle(
+                fontSize: 14.0,
+                height: 2.0,
+                letterSpacing: 1.0,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text('Quote'),
         centerTitle: true,
@@ -32,19 +63,7 @@ class _QuotesCardState extends State<QuotesCard> {
         backgroundColor: Colors.red,
       ),
       body: Column(
-        children: quote
-            .map((e) => Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    '${e.text} - ${e.author}',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      letterSpacing: 1.0,
-                      height: 2.0,
-                    ),
-                  ),
-                ))
-            .toList(),
+        children: quotes.map((e) => quoteTemplate(e)).toList(),
       ),
     );
   }

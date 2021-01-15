@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quote.dart';
+import 'quote_card.dart';
 
 void main() => runApp(MaterialApp(
       home: QuotesCard(),
@@ -22,36 +23,6 @@ class _QuotesCardState extends State<QuotesCard> {
         author: 'Albert Einstein'),
   ];
 
-  Widget quoteTemplate(quote) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              quote.text,
-              style: TextStyle(
-                fontSize: 18.0,
-                letterSpacing: 2.0,
-                height: 2.0,
-              ),
-            ),
-            Text(
-              quote.author,
-              style: TextStyle(
-                fontSize: 14.0,
-                height: 2.0,
-                letterSpacing: 1.0,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +34,7 @@ class _QuotesCardState extends State<QuotesCard> {
         backgroundColor: Colors.red,
       ),
       body: Column(
-        children: quotes.map((e) => quoteTemplate(e)).toList(),
+        children: quotes.map((quote) => QuoteCard(quote: quote)).toList(),
       ),
     );
   }
